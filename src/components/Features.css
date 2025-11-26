@@ -1,0 +1,36 @@
+.features {
+  padding: 80px 20px;
+  background-color: #000;
+}
+
+.features-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 24px;
+  color: #fff;
+}
+
+.feature-item {
+  text-align: center;
+  font-weight: 400;
+}
+
+.feature-separator {
+  color: #666;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .features-list {
+    font-size: 18px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .feature-separator {
+    font-size: 16px;
+  }
+}
