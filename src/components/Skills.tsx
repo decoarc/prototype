@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./Skills.css";
 
 const imagesPath = "/assets/components/Skills/";
@@ -20,6 +20,43 @@ const Skills: React.FC = () => {
   const currentRotation = useRef(0);
 
   const anglePerItem = 360 / skills.length;
+
+  const autoplayRef = useRef<number | null>(null);
+  const autoplaySpeed = 0.1;
+  const resumeTimeoutRef = useRef<number | null>(null);
+
+  const startAutoplay = () => {
+    if (autoplayRef.current) return;
+
+    const animate = () => {
+      setRotation((prev) => prev + autoplaySpeed);
+      autoplayRef.current = requestAnimationFrame(animate);
+    };
+
+    autoplayRef.current = requestAnimationFrame(animate);
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayRef.current) {
+      cancelAnimationFrame(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+  };
+
+  const resumeAutoplayWithDelay = () => {
+    stopAutoplay();
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
+    resumeTimeoutRef.current = window.setTimeout(() => {
+      startAutoplay();
+    }, 5000);
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => stopAutoplay();
+  }, []);
 
   const snapToNearest = () => {
     const rawIndex = Math.round(rotation / anglePerItem);
@@ -47,6 +84,7 @@ const Skills: React.FC = () => {
   };
 
   const handleStart = (clientX: number) => {
+    stopAutoplay();
     isDragging.current = true;
     startX.current = clientX;
     currentRotation.current = rotation;
@@ -66,6 +104,7 @@ const Skills: React.FC = () => {
 
     isDragging.current = false;
     snapToNearest();
+    resumeAutoplayWithDelay();
   };
 
   return (
