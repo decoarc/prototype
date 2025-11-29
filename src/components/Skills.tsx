@@ -107,6 +107,18 @@ const Skills: React.FC = () => {
     resumeAutoplayWithDelay();
   };
 
+  const getCurrentItemIndex = () => {
+    let normalizedRotation = rotation % 360;
+    if (normalizedRotation < 0) normalizedRotation += 360;
+
+    const invertedRotation = 360 - normalizedRotation;
+    const rawIndex = Math.round(invertedRotation / anglePerItem);
+    return rawIndex % skills.length;
+  };
+
+  const currentItemIndex = getCurrentItemIndex();
+  const currentSkill = skills[currentItemIndex];
+
   return (
     <section className="skills-section" id="skills">
       <div className="container">
@@ -160,6 +172,7 @@ const Skills: React.FC = () => {
             onTouchMove={(e) => handleMove(e.touches[0].clientX)}
             onTouchEnd={handleEnd}
           />
+          <div className="skill-label">{currentSkill.name}</div>
         </div>
       </div>
     </section>
