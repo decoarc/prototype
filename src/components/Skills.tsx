@@ -1,20 +1,50 @@
 import React, { useRef, useState } from "react";
 import "./Skills.css";
 
+const imagesPath = "/assets/components/Skills/";
+
 const Skills: React.FC = () => {
   const skills = [
-    { id: 1, name: "React", image: "/logo512.png" },
-    { id: 2, name: "TypeScript", image: "/logo512.png" },
-    { id: 3, name: "Node.js", image: "/logo512.png" },
-    { id: 4, name: "CSS", image: "/logo512.png" },
-    { id: 5, name: "JavaScript", image: "/logo512.png" },
-    { id: 6, name: "HTML", image: "/logo512.png" },
+    { id: 1, name: "React", image: `${imagesPath}reactLogo.png`, scale: 0.9 },
+    { id: 2, name: "TypeScript", image: `${imagesPath}tsLogo.png`, scale: 0.7 },
+    { id: 3, name: "php", image: `${imagesPath}PHPLogo.png` },
+    { id: 4, name: "Python", image: `${imagesPath}pythonLogo.png`, scale: 0.7 },
+    { id: 5, name: "JavaScript", image: `${imagesPath}jsLogo.png` },
+    { id: 6, name: "HTML", image: `${imagesPath}htmlLogo.png`, scale: 0.75 },
+    { id: 7, name: "CSS", image: `${imagesPath}cssLogo.png`, scale: 0.8 },
   ];
 
   const [rotation, setRotation] = useState(0);
   const isDragging = useRef(false);
   const startX = useRef(0);
   const currentRotation = useRef(0);
+
+  const anglePerItem = 360 / skills.length;
+
+  const snapToNearest = () => {
+    const rawIndex = Math.round(rotation / anglePerItem);
+    let targetRotation = rawIndex * anglePerItem;
+
+    while (targetRotation - rotation > 180) targetRotation -= 360;
+    while (targetRotation - rotation < -180) targetRotation += 360;
+
+    const duration = 300;
+    const start = performance.now();
+    const initial = rotation;
+    const delta = targetRotation - initial;
+
+    const animate = (time: number) => {
+      const progress = Math.min((time - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const newRot = initial + delta * eased;
+
+      setRotation(newRot);
+
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  };
 
   const handleStart = (clientX: number) => {
     isDragging.current = true;
@@ -32,7 +62,10 @@ const Skills: React.FC = () => {
   };
 
   const handleEnd = () => {
+    if (!isDragging.current) return;
+
     isDragging.current = false;
+    snapToNearest();
   };
 
   return (
@@ -66,7 +99,15 @@ const Skills: React.FC = () => {
                 className="item"
                 style={{ "--position": index + 1 } as React.CSSProperties}
               >
-                <img src={skill.image} alt={skill.name} draggable={false} />
+                <img
+                  src={skill.image}
+                  alt={skill.name}
+                  draggable={false}
+                  style={{
+                    transform: skill.scale ? `scale(${skill.scale})` : "none",
+                    objectFit: "contain",
+                  }}
+                />
               </div>
             ))}
           </div>
