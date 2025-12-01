@@ -12,6 +12,14 @@ const Skills: React.FC = () => {
     { id: 5, name: "JavaScript", image: `${imagesPath}jsLogo.png` },
     { id: 6, name: "HTML", image: `${imagesPath}htmlLogo.png`, scale: 0.75 },
     { id: 7, name: "CSS", image: `${imagesPath}cssLogo.png`, scale: 0.8 },
+    { id: 8, name: "MySQL", image: `${imagesPath}mysqlLogo.png`, scale: 0.7 },
+    {
+      id: 9,
+      name: "postgresql",
+      image: `${imagesPath}postgresqlLogo.png`,
+      scale: 0.7,
+    },
+    { id: 10, name: "c++", image: `${imagesPath}c++Logo.png`, scale: 0.7 },
   ];
 
   const [rotation, setRotation] = useState(0);
@@ -172,7 +180,9 @@ const Skills: React.FC = () => {
             onTouchMove={(e) => handleMove(e.touches[0].clientX)}
             onTouchEnd={handleEnd}
           />
-          <div className="skill-label">{currentSkill.name}</div>
+          <div className="skill-label" key={currentSkill.id}>
+            {currentSkill.name}
+          </div>
         </div>
       </div>
     </section>

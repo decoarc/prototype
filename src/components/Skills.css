@@ -103,14 +103,41 @@
   z-index: 10;
   pointer-events: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: opacity 0.3s ease;
+  letter-spacing: 3px;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 32px;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  animation: labelFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes labelFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
 }
 
 @media (max-width: 768px) {
   .skill-label {
     font-size: 24px;
     bottom: 15%;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    border-radius: 10px;
   }
 }
 
@@ -118,5 +145,8 @@
   .skill-label {
     font-size: 20px;
     bottom: 10%;
+    letter-spacing: 1.5px;
+    padding: 10px 20px;
+    border-radius: 8px;
   }
 }
