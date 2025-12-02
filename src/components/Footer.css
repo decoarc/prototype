@@ -13,9 +13,37 @@
 .footer-logo {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   letter-spacing: 2px;
   color: #fff;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
+    hue-rotate(10deg) brightness(0.9);
+  transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+  filter: brightness(0) saturate(100%) invert(100%);
+  transform: translateY(-3px);
 }
 
 .footer-copyright {
