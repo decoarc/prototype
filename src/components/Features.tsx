@@ -3,7 +3,7 @@ import "./Features.css";
 
 const Features: React.FC = () => {
   return (
-    <section className="features">
+    <section className="features" id="features">
       <div className="container">
         <div className="features-list">
           <div className="feature-separator">•✦•</div>

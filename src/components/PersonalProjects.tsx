@@ -3,7 +3,7 @@ import "./PersonalProjects.css";
 
 const PersonalProjects: React.FC = () => {
   return (
-    <section className="personal-projects">
+    <section className="personal-projects" id="projects">
       <div className="personal-projects-content">
         <div className="personal-projects-images">
           <div className="personal-projects-image-item">

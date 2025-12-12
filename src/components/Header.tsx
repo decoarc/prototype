@@ -25,6 +25,36 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
+
+    // Fecha o menu mobile se estiver aberto
+    setIsMenuOpen(false);
+
+    // Encontra o elemento alvo
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      // Calcula a altura do header dinamicamente
+      const headerElement = document.querySelector(".header") as HTMLElement;
+      const headerHeight = headerElement ? headerElement.offsetHeight : 80;
+
+      // Calcula a posição com offset para compensar o header fixo
+      const targetPosition =
+        targetElement.getBoundingClientRect().top +
+        window.scrollY -
+        headerHeight;
+
+      // Faz scroll suave
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <header
       className="header"
@@ -40,10 +70,18 @@ const Header: React.FC = () => {
           <img src="/logoHome.png" alt="Logo Prototype" className="logo" />
         </div>
         <nav className={`nav ${isMenuOpen ? "nav-open" : ""}`}>
-          <a href="#type1">type1</a>
-          <a href="#type2">type2</a>
-          <a href="#type3">type3</a>
-          <a href="#type4">type4</a>
+          <a href="#about" onClick={(e) => handleNavClick(e, "about")}>
+            About
+          </a>
+          <a href="#skills" onClick={(e) => handleNavClick(e, "skills")}>
+            Skills
+          </a>
+          <a href="#projects" onClick={(e) => handleNavClick(e, "projects")}>
+            Projects
+          </a>
+          <a href="#features" onClick={(e) => handleNavClick(e, "features")}>
+            Features
+          </a>
         </nav>
         <button
           className="menu-toggle"
