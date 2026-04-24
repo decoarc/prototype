@@ -5,10 +5,16 @@
 }
 
 .App {
+  position: relative;
   min-height: 100vh;
-  background-color: #000;
+  background-color: transparent;
   color: #fff;
   overflow-x: hidden;
+}
+
+.App-content {
+  position: relative;
+  z-index: 1;
 }
 
 .container {

@@ -1,0 +1,26 @@
+.particle-wave-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #191a1f;
+}
+
+.particle-wave-bg canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Soft vignette so content stays readable at edges */
+.particle-wave-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 85% 70% at 50% 45%,
+    transparent 0%,
+    rgba(10, 11, 14, 0.35) 100%
+  );
+}
