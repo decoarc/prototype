@@ -6,6 +6,7 @@ const BASE = "#191a1f";
 
 function ParticleWaveBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -1000, y: -1000, radius: 150 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,6 +33,19 @@ function ParticleWaveBackground() {
 
     resize();
     window.addEventListener("resize", resize);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
+    };
+    
+    const handleMouseLeave = () => {
+      mouseRef.current.x = -1000;
+      mouseRef.current.y = -1000;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseout", handleMouseLeave);
 
     const drawStill = () => {
       const w = window.innerWidth;
@@ -62,6 +76,8 @@ function ParticleWaveBackground() {
 
       const time = performance.now() / 1000;
       const positions: { x: number; y: number }[] = [];
+
+      const mouse = mouseRef.current;
 
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
@@ -112,10 +128,25 @@ function ParticleWaveBackground() {
       }
 
       for (const p of positions) {
-        const a = 0.1 + 0.09 * Math.sin(time * 1.8 + p.x * 0.008 + p.y * 0.006);
-        ctx.fillStyle = `rgba(230, 238, 255, ${a})`;
+        let a = 0.1 + 0.09 * Math.sin(time * 1.8 + p.x * 0.008 + p.y * 0.006);
+        let radius = 1.15;
+        
+        const distToMouse = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+        if (distToMouse < mouse.radius) {
+          const intensity = 1 - distToMouse / mouse.radius;
+          a += intensity * 0.8; // Light up significantly (up to ~1.0 opacity)
+          radius += intensity * 2.0; // Make the dot larger (up to 3.15 radius)
+        }
+
+        // We can even add a slight blueish core glow if it gets really bright
+        if (a > 0.6) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${a})`; // turn whiter when very bright
+        } else {
+          ctx.fillStyle = `rgba(230, 238, 255, ${a})`;
+        }
+        
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.15, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -126,6 +157,8 @@ function ParticleWaveBackground() {
 
     return () => {
       window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseout", handleMouseLeave);
       cancelAnimationFrame(raf);
     };
   }, []);
