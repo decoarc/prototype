@@ -19,42 +19,73 @@
 }
 
 .about-image {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
-  background-color: rgba(26, 26, 26, 0.65);
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: crosshair;
+  isolation: isolate;
 }
 
-.image-label {
-  color: #666;
-  font-size: 18px;
+.about-image-base,
+.about-image-reveal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.about-image-reveal {
+  z-index: 1;
+  transition:
+    mask-image 0.35s ease,
+    -webkit-mask-image 0.35s ease;
+}
+
+.about-image-glow {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  box-shadow:
+    0 0 24px rgba(0, 240, 255, 0.25),
+    inset 0 0 16px rgba(0, 240, 255, 0.08);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+.about-headline {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.35;
   font-weight: 500;
-  text-align: center;
-  padding: 20px;
-}
-
-.about-text h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  opacity: 0.7;
   color: #fff;
-  font-weight: 400;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
 }
 
-.about-text p {
-  font-size: 18px;
-  line-height: 1.8;
-  margin-bottom: 30px;
-  color: #ccc;
+.about-headline-accent {
+  color: rgba(0, 240, 255, 0.95);
 }
 
-.about-text strong {
-  font-weight: 600;
-  color: #fff;
+.about-body {
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 18px;
+  max-width: 42ch;
+}
+
+.about-body-closing {
+  margin-bottom: 32px;
+  color: rgba(255, 255, 255, 0.58);
+  font-style: italic;
 }
 
 .explore-link {
@@ -77,5 +108,31 @@
 
   .about-section h2 {
     font-size: 36px;
+  }
+
+  .about-headline {
+    font-size: 1.5rem;
+    margin-bottom: 22px;
+  }
+
+  .about-body {
+    font-size: 16px;
+    max-width: none;
+  }
+}
+
+@media (hover: none) {
+  .about-image {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-image-reveal {
+    transition: none;
+  }
+
+  .about-image-glow {
+    display: none;
   }
 }
