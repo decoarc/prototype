@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import "./AboutSection.css";
+import { scrollToSection } from "../utils/scrollToSection";
 
 const imagesPath = "/assets/components/About/";
 const REVEAL_RADIUS = 120;
@@ -103,7 +104,14 @@ const AboutSection: React.FC = () => {
               Always curious, always learning, and always looking for better
               ways to build things that create real impact.
             </p>
-            <a href="#work" className="explore-link">
+            <a
+              href="#projects"
+              className="explore-link"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection("projects");
+              }}
+            >
               Explore work
             </a>
           </div>

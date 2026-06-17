@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Header.css";
+import { scrollToSection } from "../utils/scrollToSection";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,29 +31,8 @@ const Header: React.FC = () => {
     targetId: string
   ) => {
     e.preventDefault();
-
-    // Fecha o menu mobile se estiver aberto
     setIsMenuOpen(false);
-
-    // Encontra o elemento alvo
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      // Calcula a altura do header dinamicamente
-      const headerElement = document.querySelector(".header") as HTMLElement;
-      const headerHeight = headerElement ? headerElement.offsetHeight : 80;
-
-      // Calcula a posição com offset para compensar o header fixo
-      const targetPosition =
-        targetElement.getBoundingClientRect().top +
-        window.scrollY -
-        headerHeight;
-
-      // Faz scroll suave
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      });
-    }
+    scrollToSection(targetId);
   };
 
   return (

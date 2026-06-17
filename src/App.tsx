@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header";
+import Hero from "./components/Hero";
 import PersonalProjects from "./components/PersonalProjects";
 import AboutSection from "./components/AboutSection";
 import Features from "./components/Features";
@@ -14,6 +15,7 @@ function App() {
       <ParticleWaveBackground />
       <div className="App-content">
         <Header />
+        <Hero />
         <AboutSection />
         <Skills />
         <PersonalProjects />
