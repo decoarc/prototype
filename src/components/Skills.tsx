@@ -130,9 +130,9 @@ const Skills: React.FC = () => {
   return (
     <section className="skills-section" id="skills">
       <div className="container">
-        <h2 className="skills-title">Skills & Technologies</h2>
+        <h2 className="skills-title scroll-reveal">Skills & Technologies</h2>
 
-        <div className="banner">
+        <div className="banner scroll-reveal">
           <div
             className="slider"
             style={

@@ -28,14 +28,16 @@ const PersonalProjects: React.FC = () => {
   return (
     <section className="personal-projects" id="projects">
       <div className="container personal-projects-content">
-        <h2 className="personal-projects-heading">Personal Projects</h2>
-        <p className="personal-projects-intro">
+        <h2 className="personal-projects-heading scroll-reveal">
+          Personal Projects
+        </h2>
+        <p className="personal-projects-intro scroll-reveal">
           Side projects I build to explore ideas and sharpen my craft.
         </p>
 
-        <ul className="personal-projects-list">
+        <ul className="personal-projects-list" data-scroll-stagger>
           {projects.map((project) => (
-            <li key={project.id} className="project-card">
+            <li key={project.id} className="project-card scroll-reveal-item">
               <a
                 href={project.url}
                 className="project-card-preview"

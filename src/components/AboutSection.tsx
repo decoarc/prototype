@@ -49,11 +49,11 @@ const AboutSection: React.FC = () => {
   return (
     <section className="about-section" id="about">
       <div className="container">
-        <h2>Meet Me</h2>
+        <h2 className="scroll-reveal">Meet Me</h2>
         <div className="about-content">
           <div
             ref={containerRef}
-            className="about-image"
+            className="about-image scroll-reveal"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onClick={handleClick}
@@ -88,7 +88,7 @@ const AboutSection: React.FC = () => {
               aria-hidden="true"
             />
           </div>
-          <div className="about-text">
+          <div className="about-text scroll-reveal">
             <p className="about-headline">
               Engineer by background,
               <br />

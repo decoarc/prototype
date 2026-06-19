@@ -29,9 +29,6 @@ const Hero: React.FC = () => {
           >
             View projects
           </a>
-          <a href="/cv.pdf" className="hero-cta hero-cta-secondary" download>
-            Download CV
-          </a>
         </div>
       </div>
       <div className="hero-glow" aria-hidden="true" />
