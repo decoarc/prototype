@@ -1,8 +1,9 @@
 import React, { useCallback, useRef, useState } from "react";
 import "./AboutSection.css";
 import { scrollToSection } from "../utils/scrollToSection";
+import { publicAsset } from "../utils/publicAsset";
 
-const imagesPath = "/assets/components/About/";
+const imagesPath = publicAsset("/assets/components/About/");
 const REVEAL_RADIUS = 120;
 
 const AboutSection: React.FC = () => {

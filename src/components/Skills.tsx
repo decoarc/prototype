@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Skills.css";
+import { publicAsset } from "../utils/publicAsset";
 
-const imagesPath = "/assets/components/Skills/";
+const imagesPath = publicAsset("/assets/components/Skills/");
 
 const Skills: React.FC = () => {
   const skills = [

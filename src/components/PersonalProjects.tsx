@@ -1,7 +1,8 @@
 import React from "react";
 import "./PersonalProjects.css";
+import { publicAsset } from "../utils/publicAsset";
 
-const projectsImagesPath = "/assets/components/Projects/";
+const projectsImagesPath = publicAsset("/assets/components/Projects/");
 
 type Project = {
   id: string;

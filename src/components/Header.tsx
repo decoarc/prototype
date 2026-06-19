@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Header.css";
 import { scrollToSection } from "../utils/scrollToSection";
+import { publicAsset } from "../utils/publicAsset";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +48,7 @@ const Header: React.FC = () => {
       <div className="header-container">
         <div className="logo">
           {" "}
-          <img src="/logoHome.png" alt="Logo Prototype" className="logo" />
+          <img src={publicAsset("/logoHome.png")} alt="Logo Prototype" className="logo" />
         </div>
         <nav className={`nav ${isMenuOpen ? "nav-open" : ""}`}>
           <a href="#about" onClick={(e) => handleNavClick(e, "about")}>

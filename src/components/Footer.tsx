@@ -1,22 +1,23 @@
 import React from "react";
 import "./Footer.css";
+import { publicAsset } from "../utils/publicAsset";
 
 const Footer: React.FC = () => {
   const socialLinks = [
     {
       name: "GitHub",
       url: "https://github.com/decoarc",
-      image: "/assets/components/Footer/github.svg",
+      image: publicAsset("/assets/components/Footer/github.svg"),
     },
     {
       name: "LinkedIn",
       url: "https://linkedin.com/in/andrearcodaci",
-      image: "/assets/components/Footer/linkedin.svg",
+      image: publicAsset("/assets/components/Footer/linkedin.svg"),
     },
     {
       name: "Instagram",
       url: "https://instagram.com/arcowill",
-      image: "/assets/components/Footer/instagram.svg",
+      image: publicAsset("/assets/components/Footer/instagram.svg"),
     },
   ];
 
